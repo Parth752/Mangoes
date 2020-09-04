@@ -63,6 +63,10 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background("Grey");
+  
+  textSize(40);
+  fill("Black");
+  text("Press SPACE to get one more throw.",10,50);
 
   imageMode(CENTER);
   image(treeImage,900,250,550,500);
@@ -87,27 +91,16 @@ function draw() {
 
   stoneAttach.display();
 
-  if(isTouching(stone,mango1)){
-	  attach1.detach();
-  }else if(isTouching(stone,mango2)){
-	  attach2.detach();
-  }else if(isTouching(stone,mango3)){
-	  attach3.detach();
-  }else if(isTouching(stone,mango4)){
-	  attach4.detach();
-  }else if(isTouching(stone,mango5)){
-	  attach5.detach();
-  }else if(isTouching(stone,mango6)){
-	  attach6.detach();
-  }else if(isTouching(stone,mango7)){
-	  attach7.detach();
-  }else if(isTouching(stone,mango8)){
-	  attach8.detach();
-  }else if(isTouching(stone,mango9)){
-	  attach9.detach();
-  }else if(isTouching(stone,mango10)){
-	  attach10.detach();
-  }
+  detectCollision(stone,mango1,attach1);
+  detectCollision(stone,mango2,attach2);
+  detectCollision(stone,mango3,attach3);
+  detectCollision(stone,mango4,attach4);
+  detectCollision(stone,mango5,attach5);
+  detectCollision(stone,mango6,attach6);
+  detectCollision(stone,mango7,attach7);
+  detectCollision(stone,mango8,attach8);
+  detectCollision(stone,mango9,attach9);
+  detectCollision(stone,mango10,attach10);
 
   drawSprites();
  
@@ -119,4 +112,21 @@ function mouseDragged(){
 
 function mouseReleased(){
     stoneAttach.detach();
+}
+
+function  detectCollision(lstone,lmango,lattach) {
+    mPos=lmango.body.position;
+    sPos=lstone.body.position;
+
+	var distance= dist(sPos.x,sPos.y,mPos.x,mPos.y)
+        if(distance<=lmango.body.width/2+lstone.body.width/2){
+            lattach.detach();
+        }
+}
+
+function attached(){
+	if(keyCode===32){
+		Matter.Body.setPosition(stone.body,{x : 138, y : 380});
+		attachBody(stone.body);
+	}
 }

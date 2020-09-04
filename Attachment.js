@@ -23,4 +23,8 @@ class Attach{
     detach(){
         this.attach.bodyA=null;
     }
+
+    attachBody(body){
+        this.attach.bodyA=body;
+    }
 }
