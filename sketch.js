@@ -38,16 +38,16 @@ function setup() {
 	mango9=new Mango(820,80,20);
 	mango10=new Mango(950,60,20);
 
-	attach1=new Attach(mango1.body,{x : 900, y : 100});
-	attach2=new Attach(mango2.body,{x : 820, y : 200});
-	attach3=new Attach(mango3.body,{x : 1000, y : 100});
-	attach4=new Attach(mango4.body,{x : 990, y : 190});
-	attach5=new Attach(mango5.body,{x : 1120, y : 170});
-	attach6=new Attach(mango6.body,{x : 680, y : 190});
-	attach7=new Attach(mango7.body,{x : 820, y : 140});
-	attach8=new Attach(mango8.body,{x : 900, y : 180});
-	attach9=new Attach(mango9.body,{x : 820, y : 80});
-	attach10=new Attach(mango10.body,{x : 950, y : 60});
+	// attach1=new Attach(mango1.body,{x : 900, y : 100});
+	// attach2=new Attach(mango2.body,{x : 820, y : 200});
+	// attach3=new Attach(mango3.body,{x : 1000, y : 100});
+	// attach4=new Attach(mango4.body,{x : 990, y : 190});
+	// attach5=new Attach(mango5.body,{x : 1120, y : 170});
+	// attach6=new Attach(mango6.body,{x : 680, y : 190});
+	// attach7=new Attach(mango7.body,{x : 820, y : 140});
+	// attach8=new Attach(mango8.body,{x : 900, y : 180});
+	// attach9=new Attach(mango9.body,{x : 820, y : 80});
+	// attach10=new Attach(mango10.body,{x : 950, y : 60});
 
 	ground=new Ground(width/2,490,width,20);
 
@@ -66,7 +66,7 @@ function draw() {
   
   textSize(40);
   fill("Black");
-  text("Press SPACE to get one more throw.",10,50);
+  text("Press SPACE to get one more throw.",100,50);
 
   imageMode(CENTER);
   image(treeImage,900,250,550,500);
@@ -91,16 +91,16 @@ function draw() {
 
   stoneAttach.display();
 
-  detectCollision(stone,mango1,attach1);
-  detectCollision(stone,mango2,attach2);
-  detectCollision(stone,mango3,attach3);
-  detectCollision(stone,mango4,attach4);
-  detectCollision(stone,mango5,attach5);
-  detectCollision(stone,mango6,attach6);
-  detectCollision(stone,mango7,attach7);
-  detectCollision(stone,mango8,attach8);
-  detectCollision(stone,mango9,attach9);
-  detectCollision(stone,mango10,attach10);
+  detectCollision(stone,mango1);
+  detectCollision(stone,mango2);
+  detectCollision(stone,mango3);
+  detectCollision(stone,mango4);
+  detectCollision(stone,mango5);
+  detectCollision(stone,mango6);
+  detectCollision(stone,mango7);
+  detectCollision(stone,mango8);
+  detectCollision(stone,mango9);
+  detectCollision(stone,mango10);
 
   drawSprites();
  
@@ -114,19 +114,12 @@ function mouseReleased(){
     stoneAttach.detach();
 }
 
-function  detectCollision(lstone,lmango,lattach) {
+function  detectCollision(lstone,lmango) {
     mPos=lmango.body.position;
     sPos=lstone.body.position;
 
 	var distance= dist(sPos.x,sPos.y,mPos.x,mPos.y)
-        if(distance<=lmango.body.width/2+lstone.body.width/2){
-            lattach.detach();
+        if(distance<=lmango.r+lstone.r){
+            Matter.Body.setStatic(lmango.body,false);
         }
-}
-
-function attached(){
-	if(keyCode===32){
-		Matter.Body.setPosition(stone.body,{x : 138, y : 380});
-		attachBody(stone.body);
-	}
 }
