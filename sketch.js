@@ -128,6 +128,6 @@ function  detectCollision(lstone,lmango,lattach) {
 function keyPressed(){
   if(keyCode===32){
       Matter.Body.setPosition(stone.body,{x : 138, y : 380})
-      stoneAttach=new Attach(stone.body,{x : 138, y : 380});
+      stoneAttach.attachBody(stone.body);
   }  
 }
